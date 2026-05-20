@@ -14,18 +14,23 @@ int main(void)
 	while(1)
 	{
 		KeyNum=Key_GetNum();
-		//按键PA8
-		if(KeyNum==1){
+		//eyNum==0x01写法是不对的，0x01和0x03都满足条件，所以要用位运算的方式来判断按键状态
+		if(KeyNum & 0x01)
+		{
 			LEDA0_ON();
 		}
-		//按键PA11
-		if(KeyNum==2){
+		else
+		{
+			LEDA0_OFF();
+		}
+		if (KeyNum & 0x02)
+		{
 			LEDC14_ON();
 		}
-		// if(KeyNum==0){
-		// 	LEDA0_OFF();
-		// 	LEDC14_OFF();
-		// }
+		else
+		{
+			LEDC14_OFF();
+		}
 
 	}
 }
